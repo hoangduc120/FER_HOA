@@ -1,0 +1,31 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #eeeeee; // Thay đổi màu nền tùy thích
+  
+    .header_icon_left,
+    .header_icon_right {
+      display: flex;
+      align-items: center;
+      padding: 0 50px;
+  
+      .MuiSvgIcon-root {
+        font-size: 2rem; // Tăng kích thước biểu tượng
+        margin: 0 10px; // Điều chỉnh khoảng cách giữa các biểu tượng
+      }
+    }
+  
+    .header_logo {
+      flex: 1; // Cho phép logo chiếm không gian có sẵn
+      display: flex;
+      justify-content: center;
+  
+      img {
+        max-width: 300px; // Điều chỉnh chiều cao logo
+        width: auto; // Giữ tỉ lệ khung hình
+      }
+    }
+  }
+  

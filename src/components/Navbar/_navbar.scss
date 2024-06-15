@@ -1,0 +1,26 @@
+.nav {
+  background-color: #333; // Màu nền của thanh điều hướng
+  padding: 1rem;
+
+  .navbar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+
+    li {
+      a {
+        color: white; // Màu chữ của các liên kết
+        text-decoration: none; // Loại bỏ gạch chân
+        padding: 0.5rem 1rem;
+        display: block;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #bcd100; // Màu nền khi hover
+        }
+      }   
+    }
+  }
+}
