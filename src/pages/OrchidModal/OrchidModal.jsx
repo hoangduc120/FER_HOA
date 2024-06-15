@@ -1,22 +1,19 @@
-
-import React from "react";
+// src/OrchidModal.jsx
+import React from 'react';
+import './OrchidModal.css';
 
 const OrchidModal = ({ orchid, onClose }) => {
-  if (!orchid) return null;
-
   return (
     <div className="modal">
       <div className="modal-content">
-        <span className="close" onClick={onClose}>
-          &times;
-        </span>
-        <img src={orchid.image} alt={orchid.name} />
-        <h3>{orchid.name}</h3>
+        <span className="close" onClick={onClose}>&times;</span>
+        <h2>{orchid.name}</h2>
+        <img src={orchid.image} alt={orchid.name} className="modal-image" />
         <p>Origin: {orchid.origin}</p>
         <p>Color: {orchid.color}</p>
         <p>Category: {orchid.category}</p>
-        <p>Rating: {orchid.rating}</p>
-        <p>Special: {orchid.isSpecial ? "Yes" : "No"}</p>
+        <p>Rating: {orchid.rating} / 5</p>
+        {orchid.isSpecial && <p className="special">Special Orchid</p>}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-const ListOfOrchids = [
+const ListOfOrchids  = [
   {
     Id: 1,
     name: "Taichung beauty",
@@ -160,4 +160,4 @@ const ListOfOrchids = [
     category: "Epidendrum",
   },
 ];
-export default ListOfOrchids;
+export default ListOfOrchids ;

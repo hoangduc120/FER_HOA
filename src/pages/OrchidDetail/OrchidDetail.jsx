@@ -1,23 +1,50 @@
+// OrchidDetail.jsx
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import ListOfOrchids from "../../components/datas/ListOfOrchids";
-function OrchidDetail() {
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
+  Typography,
+} from "@mui/material";
+
+const OrchidDetail = () => {
   const { Id } = useParams();
+
   const orchid = ListOfOrchids.find((orchid) => orchid.Id === parseInt(Id));
+
   if (!orchid) {
-    return <h2>Orchid not found</h2>;
+    return <div>Orchid not found</div>;
   }
-  const imagePath = `src/assets/flower/${orchid.image}`;
+
   return (
-    <div className="orchid-detail">
-      <img src={imagePath} alt={orchid.name} />
-      <h3>{orchid.name}</h3>
-      <p>Origin: {orchid.origin}</p>
-      <p>Color: {orchid.color}</p>
-      <p>Category: {orchid.category}</p>
-      <p>Rating: {orchid.rating}</p>
-      <p>Special: {orchid.isSpecial ? "True" : "False"}</p>
-    </div>
+    <Dialog open={true}>
+      <DialogTitle>{orchid.name}</DialogTitle>
+      <DialogContent>
+        <img
+          src={orchid.image}
+          alt={orchid.name}
+          style={{ width: "100%", borderRadius: "8px" }}
+        />
+        <Typography variant="body1">Origin: {orchid.origin}</Typography>
+        <Typography variant="body1">Color: {orchid.color}</Typography>
+        <Typography variant="body1">Category: {orchid.category}</Typography>
+        <Typography variant="body1">Rating: {orchid.rating} / 5</Typography>
+        {orchid.isSpecial && (
+          <Typography variant="body1">Special Orchid</Typography>
+        )}
+      </DialogContent>
+      <DialogActions>
+        <Button component={Link} to="/" color="primary">
+          Close
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
-}
+};
+
 export default OrchidDetail;
