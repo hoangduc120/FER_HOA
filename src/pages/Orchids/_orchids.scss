@@ -1,42 +1,49 @@
-
+// src/components/_orchids.scss
 .orchids-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
-    padding: 16px;
-    margin: 0 25px;
-}
-
-.orchid-item {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    text-align: center;
-    background-color: #fff;
-}
-
-.orchid-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-.orchid-item h3 {
-    margin: 8px 0;
-    font-size: 1.2em;
-}
-
-.orchid-item p {
-    margin: 4px 0;
-}
-
-.orchid-item a {
-    display: block;
-    margin-top: 8px;
-    color: #007bff;
-    text-decoration: none;
-}
-
-.orchid-item a:hover {
-    text-decoration: underline;
-}
+    .orchid-item {
+      // Default to 1 item per row for extra-small devices (xs)
+      flex: 0 0 100%;
+      max-width: 100%;
+  
+      @media (min-width: 600px) {
+        // 2 items per row for small devices (sm)
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+  
+      @media (min-width: 960px) {
+        // 3 items per row for medium devices (md)
+        flex: 0 0 33.3333%;
+        max-width: 33.3333%;
+      }
+  
+      @media (min-width: 1280px) {
+        // 4 items per row for large devices (lg) and above
+        flex: 0 0 25%;
+        max-width: 25%;
+      }
+    }
+  
+    .orchid-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+  
+    .orchid-content {
+      flex-grow: 1;
+    }
+  
+    .orchid-actions {
+      display: flex;
+      justify-content: center; // Center align the 'Detail' button
+    }
+  
+    .orchid-detail-button {
+      &:hover {
+        background-color: #1976d2; // Change background color on hover
+        color: #fff;
+      }
+    }
+  }
+  

@@ -1,0 +1,44 @@
+// _orchidDetail.scss
+.orchid-detail-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+    text-align: center; // Căn giữa chữ
+    margin-bottom: 50px;
+    .orchid-title {
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+  
+    .orchid-image {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+  
+    .orchid-text {
+      margin-bottom: 10px;
+    }
+  
+    .icon-youtube {
+      font-size: 36px; // Kích thước icon
+      color: #FF0000; // Màu đỏ của YouTube
+      cursor: pointer;
+      transition: transform 0.3s; // Hiệu ứng chuyển động
+  
+      &:hover {
+        transform: scale(1.2); // Phóng to khi hover
+      }
+    }
+  
+    .orchid-close-button {   
+      background-color: #1976d2; // Màu nền
+      color: white; // Màu chữ
+      margin-left: 500px;
+  
+      &:hover {
+        background-color: #115293; // Đổi màu khi hover
+      }
+    }
+  }
+  

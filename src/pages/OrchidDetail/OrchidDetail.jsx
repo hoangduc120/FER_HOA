@@ -1,49 +1,100 @@
-// OrchidDetail.jsx
-import React from "react";
+import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import ListOfOrchids from "../../components/datas/ListOfOrchids";
 import {
+  Typography,
+  Button,
+  Paper,
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogContentText,
   DialogActions,
-  Button,
-  Typography,
 } from "@mui/material";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+
+import "./_orchidDetail.scss";
 
 const OrchidDetail = () => {
   const { Id } = useParams();
+  const [openDialog, setOpenDialog] = useState(false); // State để theo dõi trạng thái mở/closed của dialog
 
   const orchid = ListOfOrchids.find((orchid) => orchid.Id === parseInt(Id));
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
 
   if (!orchid) {
     return <div>Orchid not found</div>;
   }
+  // Hàm lấy video ID từ đường dẫn YouTube
+  const getYouTubeId = (url) => {
+    const match = url.match(
+      /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&]+)/
+    );
+    return (match && match[1]) || null;
+  };
 
+  // Lấy video ID từ đường dẫn video của orchid
+  const youtubeId = getYouTubeId(orchid.video);
   return (
-    <Dialog open={true}>
-      <DialogTitle>{orchid.name}</DialogTitle>
-      <DialogContent>
-        <img
-          src={orchid.image}
-          alt={orchid.name}
-          style={{ width: "100%", borderRadius: "8px" }}
-        />
-        <Typography variant="body1">Origin: {orchid.origin}</Typography>
-        <Typography variant="body1">Color: {orchid.color}</Typography>
-        <Typography variant="body1">Category: {orchid.category}</Typography>
-        <Typography variant="body1">Rating: {orchid.rating} / 5</Typography>
-        {orchid.isSpecial && (
-          <Typography variant="body1">Special Orchid</Typography>
-        )}
-      </DialogContent>
-      <DialogActions>
-        <Button component={Link} to="/" color="primary">
-          Close
-        </Button>
-      </DialogActions>
-    </Dialog>
+    <Paper elevation={3} className="orchid-detail-container">
+      <Typography variant="h5" gutterBottom className="orchid-title">
+        {orchid.name}
+      </Typography>
+      <img src={orchid.image} alt={orchid.name} className="orchid-image" />
+      <Typography variant="body1" className="orchid-text">
+        Origin: {orchid.origin}
+      </Typography>
+      <Typography variant="body1" className="orchid-text">
+        Color: {orchid.color}
+      </Typography>
+      <Typography variant="body1" className="orchid-text">
+        Category: {orchid.category}
+      </Typography>
+      <Typography variant="body1" className="orchid-text">
+        Rating: {orchid.rating} / 5
+      </Typography>
+      {orchid.isSpecial && (
+        <Typography variant="body1" className="orchid-text">
+          Special Orchid
+        </Typography>
+      )}
+      <YouTubeIcon className="icon-youtube" onClick={handleOpenDialog} />
+
+      <Button
+        component={Link}
+        to="/"
+        color="primary"
+        className="orchid-close-button"
+      >
+        Close
+      </Button>
+
+      {/* Dialog để hiển thị video YouTube */}
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <DialogTitle>YouTube Video</DialogTitle>
+        <DialogContent>
+          <iframe
+            width="100%"
+            height="315"
+            src={`https://www.youtube.com/embed/${youtubeId}`}
+            title="YouTube video player"
+            frameBorder="0"
+            allowFullScreen
+          ></iframe>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Paper>
   );
 };
 

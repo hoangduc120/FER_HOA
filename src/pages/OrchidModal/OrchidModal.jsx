@@ -1,21 +1,48 @@
-// src/OrchidModal.jsx
-import React from 'react';
-import './OrchidModal.css';
+// OrchidModal.jsx
+import React from "react";
+import { useParams, Link } from "react-router-dom";
+import ListOfOrchids from "../../components/datas/ListOfOrchids";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  Typography,
+} from "@mui/material";
 
-const OrchidModal = ({ orchid, onClose }) => {
+const OrchidModal = ({ open, onClose }) => {
+  const { Id } = useParams();
+
+  const orchid = ListOfOrchids.find((orchid) => orchid.Id === parseInt(Id));
+
+  if (!orchid) {
+    return <div>Orchid not found</div>;
+  }
+
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <span className="close" onClick={onClose}>&times;</span>
-        <h2>{orchid.name}</h2>
-        <img src={orchid.image} alt={orchid.name} className="modal-image" />
-        <p>Origin: {orchid.origin}</p>
-        <p>Color: {orchid.color}</p>
-        <p>Category: {orchid.category}</p>
-        <p>Rating: {orchid.rating} / 5</p>
-        {orchid.isSpecial && <p className="special">Special Orchid</p>}
-      </div>
-    </div>
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>{orchid.name}</DialogTitle>
+      <DialogContent>
+        <img
+          src={orchid.image}
+          alt={orchid.name}
+          style={{ width: "100%", borderRadius: "8px" }}
+        />
+        <Typography variant="body1">Origin: {orchid.origin}</Typography>
+        <Typography variant="body1">Color: {orchid.color}</Typography>
+        <Typography variant="body1">Category: {orchid.category}</Typography>
+        <Typography variant="body1">Rating: {orchid.rating} / 5</Typography>
+        {orchid.isSpecial && (
+          <Typography variant="body1">Special Orchid</Typography>
+        )}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="primary">
+          Close
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 

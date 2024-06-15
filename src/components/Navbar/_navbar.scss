@@ -1,6 +1,17 @@
 .nav {
   background-color: #333; // Màu nền của thanh điều hướng
   padding: 1rem;
+  position: relative;
+
+  .menu-icon {
+    display: none; // Ẩn biểu tượng menu ở chế độ desktop
+    cursor: pointer;
+    color: white;
+
+    @media (max-width: 768px) {
+      display: block; // Hiển thị biểu tượng menu ở chế độ di động
+    }
+  }
 
   .navbar-list {
     list-style: none;
@@ -8,6 +19,7 @@
     padding: 0;
     display: flex;
     justify-content: space-around;
+    align-items: center;
 
     li {
       a {
@@ -20,7 +32,20 @@
         &:hover {
           background-color: #bcd100; // Màu nền khi hover
         }
-      }   
+      }
+    }
+
+    @media (max-width: 768px) {
+      display: none; // Ẩn danh sách menu ở chế độ di động
+      flex-direction: column; // Chuyển đổi thành dọc
+
+      &.open {
+        display: flex; // Hiển thị danh sách menu khi mở
+      }
+
+      li {
+        margin: 0.5rem 0; // Tạo khoảng cách giữa các mục menu
+      }
     }
   }
 }

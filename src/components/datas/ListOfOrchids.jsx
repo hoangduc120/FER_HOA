@@ -1,4 +1,4 @@
-const ListOfOrchids  = [
+const ListOfOrchids = [
   {
     Id: 1,
     name: "Taichung beauty",
@@ -8,6 +8,8 @@ const ListOfOrchids  = [
     color: "pink",
     origin: "Taiwan",
     category: "Cattleya",
+    video:
+      "https://www.youtube.com/watch?v=jsTFfbok8v0&pp=ygUPVGFpY2h1bmcgYmVhdXR5",
   },
   {
     Id: 2,
@@ -18,6 +20,8 @@ const ListOfOrchids  = [
     color: "white",
     origin: "Japan",
     category: "Phalaenopsis",
+    video:
+      "https://www.youtube.com/watch?v=bhOEYjiBb7o&pp=ygUPVGFpY2h1bmcgYmVhdXR5",
   },
   {
     Id: 3,
@@ -28,6 +32,8 @@ const ListOfOrchids  = [
     color: "yellow",
     origin: "Thailand",
     categor: "Dendrobium",
+    video:
+      "https://www.youtube.com/watch?v=wgRoMjBTnWI&pp=ygUPVGFpY2h1bmcgYmVhdXR5",
   },
   {
     Id: 4,
@@ -38,6 +44,8 @@ const ListOfOrchids  = [
     color: "purple",
     origin: "Philippines",
     category: "Vanda",
+    video:
+      "https://www.youtube.com/watch?v=JP5J97fPCwI&pp=ygUMUGhhbGFlbm9wc2lz",
   },
   {
     Id: 5,
@@ -48,6 +56,7 @@ const ListOfOrchids  = [
     color: "red",
     origin: "Vietnam",
     category: "Paphiopedilum",
+    video: "https://www.youtube.com/watch?v=STMu6PWn6TI&pp=ygUIT25jaWRpdW0%3D",
   },
   {
     Id: 6,
@@ -58,6 +67,7 @@ const ListOfOrchids  = [
     color: "red",
     origin: "Vietnam",
     category: "Paphiopedilum",
+    video: "https://www.youtube.com/watch?v=AfbYgUal1Tc&pp=ygUIT25jaWRpdW0%3D",
   },
   {
     Id: 7,
@@ -68,6 +78,7 @@ const ListOfOrchids  = [
     color: "purple",
     origin: "India",
     category: "Cattleya",
+    video: "https://www.youtube.com/watch?v=b7OWTqvDDuU&pp=ygUJQ3ltYmlkaXVt",
   },
   {
     Id: 8,
@@ -78,6 +89,7 @@ const ListOfOrchids  = [
     color: "yellow",
     origin: "India",
     category: "Dendrobium",
+    video: "https://www.youtube.com/watch?v=fxyLyvK8uAc&pp=ygUJQ3ltYmlkaXVt",
   },
   {
     Id: 9,
@@ -88,6 +100,7 @@ const ListOfOrchids  = [
     color: "white",
     origin: "Egypt",
     category: "Phalaenopsis",
+    video: "https://www.youtube.com/watch?v=6pj3CkmZZAk&pp=ygUJQ3ltYmlkaXVt",
   },
   {
     Id: 10,
@@ -98,6 +111,7 @@ const ListOfOrchids  = [
     color: "red",
     origin: "Kenya",
     category: "Paphiopedilum",
+    video: "https://www.youtube.com/watch?v=gcu2Luwsc_M&pp=ygUJQ3ltYmlkaXVt",
   },
   {
     Id: 11,
@@ -108,6 +122,7 @@ const ListOfOrchids  = [
     color: "blue",
     origin: "South Africa",
     category: "Oncidium",
+    video: "https://www.youtube.com/watch?v=GV0oLYLgSJs&pp=ygUGT3Bocnlz",
   },
   {
     Id: 12,
@@ -118,6 +133,7 @@ const ListOfOrchids  = [
     color: "orange",
     origin: "Australia",
     category: "Cymbidium",
+    video: "https://www.youtube.com/watch?v=GzPT9DgbvQk&pp=ygUGT3Bocnlz",
   },
   {
     Id: 13,
@@ -128,6 +144,7 @@ const ListOfOrchids  = [
     color: "green",
     origin: "New Zealand",
     category: "Bulbophyllum",
+    video: "https://www.youtube.com/watch?v=juIMf0yKQwU&pp=ygUGT3Bocnlz",
   },
   {
     Id: 14,
@@ -138,6 +155,8 @@ const ListOfOrchids  = [
     color: "purple",
     origin: "Argentina",
     category: "Brassavola",
+    video:
+      "https://www.youtube.com/watch?v=aE7jtwvB8c4&pp=ygULTWFzZGV2YWxsaWE%3D",
   },
   {
     Id: 15,
@@ -148,6 +167,8 @@ const ListOfOrchids  = [
     color: "yellow",
     origin: "Brazil",
     category: "Coelogyne",
+    video:
+      "https://www.youtube.com/watch?v=06ztJCRMBJg&pp=ygULTWFzZGV2YWxsaWE%3D",
   },
   {
     Id: 16,
@@ -158,6 +179,7 @@ const ListOfOrchids  = [
     color: "red",
     origin: "Chile",
     category: "Epidendrum",
+    video: "https://www.youtube.com/watch?v=V5BBTsq8zVc&pp=ygULTWFzZGV2YWxsaWE%3D",
   },
 ];
-export default ListOfOrchids ;
+export default ListOfOrchids;
