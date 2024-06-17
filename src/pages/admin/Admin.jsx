@@ -7,6 +7,25 @@ function Admin() {
   const [data, setData] = useState([]);
   const [editId, setEditId] = useState();
 
+  // const addProduct = async (e: any) => {
+  //   e.preventDefault();
+  //   try {
+  //     await axios.post("https://664eb874fafad45dfae0e1bc.mockapi.io/orchids", {
+  //       name: e.target.name.value,
+  //       origin: e.target.origin.value,
+  //       color: e.target.color.value,
+  //       category: e.target.category.value,
+  //       image: e.target.image.value,
+  //       rating: e.target.rating.value,
+  //       isSpecial: e.target.isSpecial.value,
+  //     });
+  //     alert("Successfully added ");
+  //   } catch (error) {
+  //     alert("Error!");
+  //     console.log(error);
+  //   }
+  // };
+
   useEffect(() => {
     axios
       .get("https://664eb874fafad45dfae0e1bc.mockapi.io/orchids")
@@ -18,6 +37,11 @@ function Admin() {
 
   const handleEdit = (id) => {
     console.log(id);
+    axios
+      .put(`https://664eb874fafad45dfae0e1bc.mockapi.io/orchids/${id}`, editId)
+      .then((res) => {
+        alert("Data updated susccessfully!");
+      });
   };
   const handleDelete = (id) => {
     console.log(id);
@@ -25,6 +49,9 @@ function Admin() {
   return (
     <>
       <div className="container">
+        <div className="button-add">
+          Add +
+          </div>
         <table className="admin-table">
           <thead>
             <tr>
@@ -54,6 +81,7 @@ function Admin() {
                 <td>{item.isSpecial}</td>
                 <td>
                   <Button
+                    type="submit"
                     variant="contained"
                     color="warning"
                     onClick={() => {

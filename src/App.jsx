@@ -13,6 +13,8 @@ import News from "./pages/new/New";
 import Login from "./pages/login/Login";
 import Admin from "./pages/admin/Admin";
 import Profile from "./pages/profile/Profile";
+import Create from "./pages/crud/Create";
+
 
 function App() {
   const [theme, toggleTheme] = useTheme();
@@ -36,6 +38,9 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/news" element={<News />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/create" element={<Create />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/profile" element={<Profile />} />
             </Routes>
           </Container>
