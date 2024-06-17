@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import ListOfOrchids from "../../components/datas/ListOfOrchids";
 import {
   Typography,
   Button,
@@ -13,12 +12,27 @@ import {
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
 import "./_orchidDetail.scss";
+import axios from "axios";
 
 const OrchidDetail = () => {
-  const { Id } = useParams();
+  const { id } = useParams();
   const [openDialog, setOpenDialog] = useState(false); // State để theo dõi trạng thái mở/closed của dialog
+  const [orchid, setOrchid] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const orchid = ListOfOrchids.find((orchid) => orchid.Id === parseInt(Id));
+  useEffect(() => {
+    axios
+      .get(`https://664eb874fafad45dfae0e1bc.mockapi.io/orchids/${id}`)
+      .then((res) => {
+        setOrchid(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err);
+        setLoading(false);
+      });
+  }, [id]);
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
@@ -38,6 +52,17 @@ const OrchidDetail = () => {
     );
     return (match && match[1]) || null;
   };
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (!orchid) {
+    return <div>Orchid not found</div>;
+  }
 
   // Lấy video ID từ đường dẫn video của orchid
   const youtubeId = getYouTubeId(orchid.video);
@@ -74,6 +99,7 @@ const OrchidDetail = () => {
       >
         Close
       </Button>
+      
 
       {/* Dialog để hiển thị video YouTube */}
       <Dialog open={openDialog} onClose={handleCloseDialog}>

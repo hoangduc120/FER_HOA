@@ -1,49 +1,49 @@
 // src/components/_orchids.scss
 .orchids-container {
-    .orchid-item {
-      // Default to 1 item per row for extra-small devices (xs)
-      flex: 0 0 100%;
-      max-width: 100%;
-  
-      @media (min-width: 600px) {
-        // 2 items per row for small devices (sm)
-        flex: 0 0 50%;
-        max-width: 50%;
-      }
-  
-      @media (min-width: 960px) {
-        // 3 items per row for medium devices (md)
-        flex: 0 0 33.3333%;
-        max-width: 33.3333%;
-      }
-  
-      @media (min-width: 1280px) {
-        // 4 items per row for large devices (lg) and above
-        flex: 0 0 25%;
-        max-width: 25%;
-      }
+  margin-bottom: 50px;
+  .orchid-item {
+    // Default to 1 item per row for extra-small devices (xs)
+    flex: 0 0 100%;
+    max-width: 100%;
+
+    @media (min-width: 600px) {
+      // 2 items per row for small devices (sm)
+      flex: 0 0 50%;
+      max-width: 50%;
     }
-  
-    .orchid-card {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
+
+    @media (min-width: 960px) {
+      // 3 items per row for medium devices (md)
+      flex: 0 0 33.3333%;
+      max-width: 33.3333%;
     }
-  
-    .orchid-content {
-      flex-grow: 1;
-    }
-  
-    .orchid-actions {
-      display: flex;
-      justify-content: center; // Center align the 'Detail' button
-    }
-  
-    .orchid-detail-button {
-      &:hover {
-        background-color: #1976d2; // Change background color on hover
-        color: #fff;
-      }
+
+    @media (min-width: 1280px) {
+      // 4 items per row for large devices (lg) and above
+      flex: 0 0 25%;
+      max-width: 25%;
     }
   }
-  
+
+  .orchid-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .orchid-content {
+    flex-grow: 1;
+  }
+
+  .orchid-actions {
+    display: flex;
+    justify-content: center; // Center align the 'Detail' button
+  }
+
+  .orchid-detail-button {
+    &:hover {
+      background-color: #1976d2; // Change background color on hover
+      color: #fff;
+    }
+  }
+}

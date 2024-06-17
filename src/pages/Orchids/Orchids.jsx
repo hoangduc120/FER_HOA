@@ -1,7 +1,6 @@
 // src/components/Orchids.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import ListOfOrchids from "../../components/datas/ListOfOrchids";
 import {
   Card,
   CardMedia,
@@ -12,15 +11,32 @@ import {
   Grid,
 } from "@mui/material";
 import "./_orchids.scss";
+import axios from "axios";
 
 const Orchids = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://664eb874fafad45dfae0e1bc.mockapi.io/orchids")
+      .then((res) => setData(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <Grid container spacing={4} className="orchids-container">
-      {ListOfOrchids.map((orchid) => (
-        <Grid item xs={12} sm={6} md={3} key={orchid.Id} className="orchid-item">
+      {data.map((orchid) => (
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={3}
+          key={orchid.id}
+          className="orchid-item"
+        >
           <Card className="orchid-card">
             <Link
-              to={`/orchid/${orchid.Id}`}
+              to={`/orchid/${orchid.id}`}
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <CardMedia
@@ -53,7 +69,12 @@ const Orchids = () => {
               )}
             </CardContent>
             <CardActions className="orchid-actions">
-              <Button size="small" component={Link} to={`/orchid/${orchid.Id}`} className="orchid-detail-button">
+              <Button
+                size="small"
+                component={Link}
+                to={`/orchid/${orchid.id}`}
+                className="orchid-detail-button"
+              >
                 Detail
               </Button>
             </CardActions>
