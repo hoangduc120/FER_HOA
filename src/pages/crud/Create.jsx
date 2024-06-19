@@ -1,81 +1,189 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import {
+  Box,
+  Button,
+  Container,
+  FormControlLabel,
+  Switch,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 function Create() {
   const [avatar, setAvatar] = useState();
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    image: "",
-  });
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Cleanup preview URLs on component unmount
   useEffect(() => {
-    // cleanup
     return () => {
       avatar && URL.revokeObjectURL(avatar.preview);
     };
   }, [avatar]);
+
   const handlePreviewAvatar = (e) => {
     const file = e.target.files[0];
-
     file.preview = URL.createObjectURL(file);
-
     setAvatar(file);
+    formik.setFieldValue("image", file);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(values);
-    axios
-      .post("https://664eb874fafad45dfae0e1bc.mockapi.io/orchids", values)
-      .then((res) => {
-        console.log(res);
-        navigate("/admin")
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      image: "",
+      origin: "",
+      color: "",
+      category: "",
+      rating: "",
+      isSpecial: false,
+      video: "",
+    },
+    validationSchema: Yup.object({
+      name: Yup.string().required("Name is required"),
+      image: Yup.mixed().required("Image is required"),
+      origin: Yup.string().required("Origin is required"),
+      color: Yup.string().required("Color is required"),
+      category: Yup.string().required("Category is required"),
+      rating: Yup.string().required("Rating is required"),
+      isSpecial: Yup.boolean().required("IsSpecial is required"),
+      video: Yup.string()
+        .url("Invalid URL format")
+        .required("Video URL is required"),
+    }),
+    onSubmit: async (values) => {
+      setIsSubmitting(true);
+      axios
+        .post("https://664eb874fafad45dfae0e1bc.mockapi.io/orchids", values)
+        .then((res) => {
+          console.log(res);
+          alert("Successfully added");
+          navigate("/admin");
+        })
+        .catch((err) => {
+          alert("Error! See the console for details");
+          console.log(err);
+        })
+        .finally(() => {
+          setIsSubmitting(false);
+        });
+    },
+  });
+
   return (
-    <div>
-      <div>
-        <h1>Add</h1>
-        <form onSubmit={"dùng formik" + handleSubmit}>
-          <div>
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              name="name"
-              className="form-control"
-              onChange={(e) => setValues({ ...values, name: e.target.value })}
-            />
-          </div>
-          <div>
-            <label htmlFor="name">Email</label>
-            <input
-              type="text"
-              name="name"
-              className="form-control"
-              onChange={(e) => setValues({ ...values, name: e.target.value })}
-            />
-          </div>
-          <div>
-            <label htmlFor="image">Image</label>
-            <input
-              type="file"
-              name="name"
-              className="form-control"
-              onChange={handlePreviewAvatar}
-            />
-            {avatar && <img src={avatar.preview} alt="" width="20%" />}
-          </div>
-          <button>Submit</button>
-          <Link to={"/admin"}>Back</Link>
-        </form>
-      </div>
-    </div>
+    <Container maxWidth="sm">
+      <Typography variant="h4" component="h1" gutterBottom>
+        Add
+      </Typography>
+      <form onSubmit={formik.handleSubmit}>
+        <Box mb={3}>
+          <TextField
+            fullWidth
+            id="name"
+            name="name"
+            label="Name"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+            error={formik.touched.name && Boolean(formik.errors.name)}
+            helperText={formik.touched.name && formik.errors.name}
+          />
+        </Box>
+        <Box mb={3}>
+          <TextField
+            fullWidth
+            id="color"
+            name="color"
+            label="Color"
+            value={formik.values.color}
+            onChange={formik.handleChange}
+            error={formik.touched.color && Boolean(formik.errors.color)}
+            helperText={formik.touched.color && formik.errors.color}
+          />
+        </Box>
+        <Box mb={3}>
+          <TextField
+            fullWidth
+            id="rating"
+            name="rating"
+            label="Rating"
+            value={formik.values.rating}
+            onChange={formik.handleChange}
+            error={formik.touched.rating && Boolean(formik.errors.rating)}
+            helperText={formik.touched.rating && formik.errors.rating}
+          />
+        </Box>
+        <Box mb={3}>
+          <TextField
+            fullWidth
+            id="origin"
+            name="origin"
+            label="Origin"
+            value={formik.values.origin}
+            onChange={formik.handleChange}
+            error={formik.touched.origin && Boolean(formik.errors.origin)}
+            helperText={formik.touched.origin && formik.errors.origin}
+          />
+        </Box>
+        <Box mb={3}>
+          <TextField
+            fullWidth
+            id="category"
+            name="category"
+            label="Category"
+            value={formik.values.category}
+            onChange={formik.handleChange}
+            error={formik.touched.category && Boolean(formik.errors.category)}
+            helperText={formik.touched.category && formik.errors.category}
+          />
+        </Box>
+        <Box mb={3}>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={formik.values.isSpecial}
+                onChange={formik.handleChange}
+                name="isSpecial"
+                color="primary"
+              />
+            }
+            label="Is Special"
+          />
+        </Box>
+        <Box mb={3}>
+          <Button variant="contained" component="label" fullWidth>
+            Upload Image
+            <input type="file" hidden onChange={handlePreviewAvatar} />
+          </Button>
+          {avatar && <img src={avatar.preview} alt="" width="40%" />}
+          {formik.touched.image && formik.errors.image && (
+            <Typography color="error">{formik.errors.image}</Typography>
+          )}
+        </Box>
+        <Box mb={3}>
+          <TextField
+            fullWidth
+            id="video"
+            name="video"
+            label="Video URL"
+            value={formik.values.video}
+            onChange={formik.handleChange}
+            error={formik.touched.video && Boolean(formik.errors.video)}
+            helperText={formik.touched.video && formik.errors.video}
+          />
+        </Box>
+
+        <Button type="submit" fullWidth disabled={isSubmitting}>
+          {isSubmitting ? "Submitting..." : "Submit"}
+        </Button>
+        <Button component={Link} to={"/admin"} fullWidth>
+          Back
+        </Button>
+      </form>
+    </Container>
   );
 }
 

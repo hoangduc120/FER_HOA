@@ -3,6 +3,7 @@ import "./_navbar.scss";
 import { Link, useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+// import { UserAuth } from '../context/AuthContext';
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("Home");

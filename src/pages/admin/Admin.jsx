@@ -3,6 +3,10 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./_admin.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
+import Rating from "@mui/material/Rating";
 function Admin() {
   const [data, setData] = useState([]);
   const [editId, setEditId] = useState();
@@ -40,18 +44,21 @@ function Admin() {
     axios
       .put(`https://664eb874fafad45dfae0e1bc.mockapi.io/orchids/${id}`, editId)
       .then((res) => {
-        alert("Data updated susccessfully!");
+        // alert("Data updated susccessfully!");
+        toast.success("Data updated susccessfully!");
       });
   };
   const handleDelete = (id) => {
     console.log(id);
+    toast.success("Data delete susccessfully!");
   };
   return (
     <>
       <div className="container">
-        <div className="button-add">
-          Add +
-          </div>
+        <ToastContainer />
+        <Link to={"/create"}>
+          <Button className="button-add">Add +</Button>
+        </Link>
         <table className="admin-table">
           <thead>
             <tr>
@@ -77,7 +84,7 @@ function Admin() {
                 <td>
                   <img src={item.image} alt="" />
                 </td>
-                <td>{item.rating}</td>
+                <td> <Rating name="read-only" value={item.rating} readOnly /></td>
                 <td>{item.isSpecial}</td>
                 <td>
                   <Button

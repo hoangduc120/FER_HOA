@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
-  Typography,
   Button,
   Paper,
   Dialog,
@@ -9,6 +8,9 @@ import {
   DialogContent,
   DialogActions,
 } from "@mui/material";
+import Rating from "@mui/material/Rating";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
 import "./_orchidDetail.scss";
@@ -81,9 +83,16 @@ const OrchidDetail = () => {
       <Typography variant="body1" className="orchid-text">
         Category: {orchid.category}
       </Typography>
-      <Typography variant="body1" className="orchid-text">
-        Rating: {orchid.rating} / 5
-      </Typography>
+      <Box
+        sx={{
+          "& > legend": { mt: 2 },
+        }}
+      >
+        <Typography variant="body1" className="orchid-text" component="span">
+          Rating
+        </Typography>
+        <Rating name="rating" value={orchid.rating} readOnly />
+      </Box>
       {orchid.isSpecial && (
         <Typography variant="body1" className="orchid-text">
           Special Orchid
@@ -99,7 +108,6 @@ const OrchidDetail = () => {
       >
         Close
       </Button>
-      
 
       {/* Dialog để hiển thị video YouTube */}
       <Dialog open={openDialog} onClose={handleCloseDialog}>

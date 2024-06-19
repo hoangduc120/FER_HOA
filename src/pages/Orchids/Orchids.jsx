@@ -5,11 +5,13 @@ import {
   Card,
   CardMedia,
   CardContent,
-  Typography,
   CardActions,
   Button,
   Grid,
 } from "@mui/material";
+import Rating from "@mui/material/Rating";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import "./_orchids.scss";
 import axios from "axios";
 
@@ -59,10 +61,21 @@ const Orchids = () => {
               <Typography variant="body2" color="text.secondary">
                 Category: {orchid.category}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Rating: {orchid.rating} / 5
-              </Typography>
-              {orchid.isSpecial && (
+              <Box
+                sx={{
+                  "& > legend": { mt: 2 },
+                }}
+              >
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  component="span"
+                >
+                  Rating
+                </Typography>
+                <Rating name="rating" value={orchid.rating} readOnly />
+              </Box>
+              {orchid.isSpecial === "true" && (
                 <Typography variant="body2" color="text.secondary">
                   Special Orchid
                 </Typography>
