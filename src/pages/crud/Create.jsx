@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -14,23 +14,10 @@ import {
 } from "@mui/material";
 
 function Create() {
-  const [avatar, setAvatar] = useState();
+
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Cleanup preview URLs on component unmount
-  useEffect(() => {
-    return () => {
-      avatar && URL.revokeObjectURL(avatar.preview);
-    };
-  }, [avatar]);
-
-  const handlePreviewAvatar = (e) => {
-    const file = e.target.files[0];
-    file.preview = URL.createObjectURL(file);
-    setAvatar(file);
-    formik.setFieldValue("image", file);
-  };
 
   const formik = useFormik({
     initialValues: {
@@ -45,12 +32,15 @@ function Create() {
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Name is required"),
-      image: Yup.mixed().required("Image is required"),
+      image: Yup.string().required("Image is required").url("Invalid URL format"),
       origin: Yup.string().required("Origin is required"),
       color: Yup.string().required("Color is required"),
       category: Yup.string().required("Category is required"),
-      rating: Yup.string().required("Rating is required"),
       isSpecial: Yup.boolean().required("IsSpecial is required"),
+      rating: Yup.number()
+        .required("Required")
+        .min(1, "Min rating is 1")
+        .max(5, "Max rating is 5"),
       video: Yup.string()
         .url("Invalid URL format")
         .required("Video URL is required"),
@@ -154,14 +144,16 @@ function Create() {
           />
         </Box>
         <Box mb={3}>
-          <Button variant="contained" component="label" fullWidth>
-            Upload Image
-            <input type="file" hidden onChange={handlePreviewAvatar} />
-          </Button>
-          {avatar && <img src={avatar.preview} alt="" width="40%" />}
-          {formik.touched.image && formik.errors.image && (
-            <Typography color="error">{formik.errors.image}</Typography>
-          )}
+          <TextField
+            fullWidth
+            id="image"
+            name="image"
+            label="Image"
+            value={formik.values.image}
+            onChange={formik.handleChange}
+            error={formik.touched.image && Boolean(formik.errors.image)}
+            helperText={formik.touched.image && formik.errors.image}
+          />
         </Box>
         <Box mb={3}>
           <TextField
@@ -175,7 +167,6 @@ function Create() {
             helperText={formik.touched.video && formik.errors.video}
           />
         </Box>
-
         <Button type="submit" fullWidth disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Submit"}
         </Button>

@@ -9,49 +9,36 @@ import { Link } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 function Admin() {
   const [data, setData] = useState([]);
-  const [editId, setEditId] = useState();
 
-  // const addProduct = async (e: any) => {
-  //   e.preventDefault();
-  //   try {
-  //     await axios.post("https://664eb874fafad45dfae0e1bc.mockapi.io/orchids", {
-  //       name: e.target.name.value,
-  //       origin: e.target.origin.value,
-  //       color: e.target.color.value,
-  //       category: e.target.category.value,
-  //       image: e.target.image.value,
-  //       rating: e.target.rating.value,
-  //       isSpecial: e.target.isSpecial.value,
-  //     });
-  //     alert("Successfully added ");
-  //   } catch (error) {
-  //     alert("Error!");
-  //     console.log(error);
-  //   }
-  // };
-
-  useEffect(() => {
+  const fetchData = () => {
     axios
       .get("https://664eb874fafad45dfae0e1bc.mockapi.io/orchids")
       .then((res) => setData(res.data))
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
-  const handleEdit = (id) => {
-    console.log(id);
-    axios
-      .put(`https://664eb874fafad45dfae0e1bc.mockapi.io/orchids/${id}`, editId)
-      .then((res) => {
-        // alert("Data updated susccessfully!");
-        toast.success("Data updated susccessfully!");
-      });
-  };
   const handleDelete = (id) => {
-    console.log(id);
-    toast.success("Data delete susccessfully!");
+    const confirm = window.confirm("Are you sure you want to delete");
+    if (confirm) {
+      axios
+        .delete(`https://664eb874fafad45dfae0e1bc.mockapi.io/orchids/${id}`)
+        .then((res) => {
+          toast.success("Data delete susccessfully!");
+          fetchData();
+        })
+        .catch((error) => {
+          toast.error("Error deleting!");
+          console.log(error);
+        })
+    }
   };
+
   return (
     <>
       <div className="container">
@@ -84,29 +71,29 @@ function Admin() {
                 <td>
                   <img src={item.image} alt="" />
                 </td>
-                <td> <Rating name="read-only" value={item.rating} readOnly /></td>
+                <td>
+                  {" "}
+                  <Rating name="read-only" value={item.rating} readOnly />
+                </td>
                 <td>{item.isSpecial}</td>
                 <td>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="warning"
-                    onClick={() => {
-                      handleEdit(item.id);
-                      setEditId(item.id);
-                    }}
-                  >
-                    Update
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="error"
-                    onClick={() => {
-                      handleDelete(item.id);
-                    }}
-                  >
-                    Delete
-                  </Button>
+                  <div className="button-container">
+                    <Button
+                      component={Link}
+                      to={`/update/${item.id}`}
+                      variant="contained"
+                      color="warning"
+                    >
+                      Update
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      onClick={(e) => handleDelete(item.id)}
+                    >
+                      Delete
+                    </Button>
+                  </div>
                 </td>
               </tr>
             ))}
