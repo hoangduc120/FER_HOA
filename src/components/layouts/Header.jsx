@@ -5,13 +5,10 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import headerLogo from "../../assets/web/logo02.jpg";
 import PersonIcon from "@mui/icons-material/Person";
 import { Button, Menu, MenuItem } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./_header.scss";
 
 function Header() {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const navigate = useNavigate();
-
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -21,11 +18,6 @@ function Header() {
     setAnchorEl(null);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("isAdmin");
-    setIsAdmin(false);
-    navigate("/login");
-  };
   return (
     <header className="header">
       <div className="header_icon_left">
@@ -65,27 +57,11 @@ function Header() {
           }}
         >
           <MenuItem onClick={handleClose} className="header_icon_right">
-            <div>
-              {isAdmin ? (
-                <div onClick={handleLogout} className="logout-icon">
-                  Logout
-                </div>
-              ) : (
-                <Link
-                  to="/login"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  Login
-                </Link>
-              )}
-            </div>
-          </MenuItem>
-          <MenuItem onClick={handleClose}>
             <Link
-              to="/profile"
+              to="/loginGG"
               style={{ textDecoration: "none", color: "black" }}
             >
-              Profile
+              Login
             </Link>
           </MenuItem>
         </Menu>

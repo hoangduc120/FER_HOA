@@ -1,17 +1,19 @@
-.footer-background {
-  background-image: url("../../assets/web/bannerhoa.jpg");
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-}
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-
-  .logo {
+.footer {
+  min-height: 200px;
+  &-background {
+    background-image: url("../../assets/web/bannerhoa.jpg");
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+  }
+  &-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  &-logo {
     color: azure;
     flex: 1 1 auto;
     display: flex;
@@ -21,7 +23,8 @@
       max-width: 175px;
     }
   }
-  .footer-section {
+
+  &-section {
     flex: 1 1 auto;
     margin: 10px;
     h2 {
@@ -50,12 +53,12 @@
       }
     }
   }
-}
-.footer-bottom {
-  text-align: center;
-  margin-top: 20px;
-  p {
-    margin: 0;
+  &-bottom {
+    text-align: center;
+    margin-top: 20px;
+    p {
+      margin: 0;
+    }
   }
 }
 .icon {

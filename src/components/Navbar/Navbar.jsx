@@ -1,37 +1,35 @@
 import { useEffect, useState } from "react";
-import "./_navbar.scss";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-// import { UserAuth } from '../context/AuthContext';
+import { useAuth } from "../context/AuthContext";
+import "./_navbar.scss";
+
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("/");
-  const [isAdmin, setIsAdmin] = useState(false);
   const location = useLocation();
-  useEffect(() => {
-    if (location.pathname === "/") {
-      setActiveTab("Home");
-    } else if (location.pathname === "/contact") {
-      setActiveTab("Contact");
-    } else if (location.pathname === "/about") {
-      setActiveTab("About");
-    } else if (location.pathname === "/admin") {
-      setActiveTab("Admin");
-    } else if (location.pathname === "/news") {
-      setActiveTab("News");
-    }
-  }, [location]);
+  const { user, signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const adminStatus = localStorage.getItem("isAdmin");
-    if (adminStatus === "true") {
-      setIsAdmin(true);
-    }
-  }, []);
+    setActiveTab(location.pathname);
+  }, [location]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleAdminClick = async () => {
+    if (!user) {
+      try {
+        await signInWithGoogle();
+      } catch (error) {
+        console.error("Lỗi khi đăng nhập bằng Google", error);
+      }
+    } else {
+      navigate("/admin");
+    }
   };
 
   return (
@@ -42,46 +40,39 @@ function Navbar() {
       <div className={`navbar-list ${isOpen ? "open" : ""}`}>
         <Link to="/">
           <p
-            className={`${activeTab === "Home" ? "active" : ""}`}
-            onClick={() => setActiveTab("Home")}
+            className={`${activeTab === "/" ? "active" : ""}`}
+            onClick={() => setActiveTab("/")}
           >
             Home
           </p>
         </Link>
         <Link to="/contact">
           <p
-            className={`${activeTab === "Contact" ? "active" : ""}`}
-            onClick={() => setActiveTab("Contact")}
+            className={`${activeTab === "/contact" ? "active" : ""}`}
+            onClick={() => setActiveTab("/contact")}
           >
             Contact
           </p>
         </Link>
         <Link to="/about">
           <p
-            className={`${activeTab === "About" ? "active" : ""}`}
-            onClick={() => setActiveTab("About")}
+            className={`${activeTab === "/about" ? "active" : ""}`}
+            onClick={() => setActiveTab("/about")}
           >
             About
           </p>
         </Link>
         <Link to="/news">
           <p
-            className={`${activeTab === "News" ? "active" : ""}`}
-            onClick={() => setActiveTab("News")}
+            className={`${activeTab === "/news" ? "active" : ""}`}
+            onClick={() => setActiveTab("/news")}
           >
             News
           </p>
         </Link>
-        {isAdmin && (
-          <Link to="/admin">
-            <p
-              className={`${activeTab === "Admin" ? "active" : ""}`}
-              onClick={() => setActiveTab("Admin")}
-            >
-              Admin
-            </p>
-          </Link>
-        )}
+        <Link to="/admin" onClick={handleAdminClick}>
+          <p className={`${activeTab === "/admin" ? "active" : ""}`}>Admin</p>
+        </Link>
       </div>
     </nav>
   );

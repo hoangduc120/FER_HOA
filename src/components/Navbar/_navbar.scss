@@ -30,34 +30,36 @@
         display: flex; // Show menu list when open
       }
 
+      a,
       p {
         width: 100%; // Full width for each item in mobile view
         margin: 0.5rem 0; // Space between menu items
+        text-align: center; // Center align text in mobile view
+      }
+    }
+
+    a {
+      text-decoration: none; // Remove underline from links
+    }
+
+    p {
+      color: white;
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 5px;
+      flex: 1; // Ensure even spacing
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ddd;
+        color: #5d6770;
+      }
+
+      &.active {
+        background-color: #bcd100;
+        color: white;
       }
     }
   }
 
-  a {
-    text-decoration: none; // Remove underline from links
-  }
-
-  p {
-    color: white;
-    text-align: center;
-    padding: 10px;
-    font-size: 18px;
-    line-height: 15px;
-    border-radius: 5px;
-    flex: 1; // Ensure even spacing
-
-    &:hover {
-      background-color: #ddd;
-      color: #5d6770;
-    }
-
-    &.active {
-      background-color: #bcd100;
-      color: white;
-    }
-  }
 }
