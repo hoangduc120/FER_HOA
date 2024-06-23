@@ -1,8 +1,9 @@
 import axios from "axios";
-import {  useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import Rating from "@mui/material/Rating";
 import {
   Box,
   Button,
@@ -14,10 +15,8 @@ import {
 } from "@mui/material";
 
 function Create() {
-
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-
 
   const formik = useFormik({
     initialValues: {
@@ -26,21 +25,18 @@ function Create() {
       origin: "",
       color: "",
       category: "",
-      rating: "",
+      rating: 0,
       isSpecial: false,
       video: "",
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Name is required"),
-      image: Yup.string().required("Image is required").url("Invalid URL format"),
+      image: Yup.string()
+        .required("Image is required")
+        .url("Invalid URL format"),
       origin: Yup.string().required("Origin is required"),
       color: Yup.string().required("Color is required"),
       category: Yup.string().required("Category is required"),
-      isSpecial: Yup.boolean().required("IsSpecial is required"),
-      rating: Yup.number()
-        .required("Required")
-        .min(1, "Min rating is 1")
-        .max(5, "Max rating is 5"),
       video: Yup.string()
         .url("Invalid URL format")
         .required("Video URL is required"),
@@ -67,7 +63,7 @@ function Create() {
   return (
     <Container maxWidth="sm">
       <Typography variant="h4" component="h1" gutterBottom>
-        Add
+        Add Orchid
       </Typography>
       <form onSubmit={formik.handleSubmit}>
         <Box mb={3}>
@@ -92,18 +88,6 @@ function Create() {
             onChange={formik.handleChange}
             error={formik.touched.color && Boolean(formik.errors.color)}
             helperText={formik.touched.color && formik.errors.color}
-          />
-        </Box>
-        <Box mb={3}>
-          <TextField
-            fullWidth
-            id="rating"
-            name="rating"
-            label="Rating"
-            value={formik.values.rating}
-            onChange={formik.handleChange}
-            error={formik.touched.rating && Boolean(formik.errors.rating)}
-            helperText={formik.touched.rating && formik.errors.rating}
           />
         </Box>
         <Box mb={3}>
@@ -135,12 +119,28 @@ function Create() {
             control={
               <Switch
                 checked={formik.values.isSpecial}
-                onChange={formik.handleChange}
+                onChange={(e) => {
+                  formik.setFieldValue("isSpecial", e.target.checked);
+                }}
                 name="isSpecial"
                 color="primary"
               />
             }
             label="Is Special"
+          />
+        </Box>
+        <Box
+          mb={3}
+          sx={{
+            "& > legend": { mt: 2 },
+          }}
+        >
+          <Typography component="legend">Rating</Typography>
+          <Rating
+            id="rating"
+            name="rating"
+            value={formik.values.rating}
+            onChange={(e, newValue) => formik.setFieldValue("rating", newValue)}
           />
         </Box>
         <Box mb={3}>

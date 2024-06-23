@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { useAuth } from "../context/AuthContext";
+
 import "./_navbar.scss";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("/");
   const location = useLocation();
-  const { user, signInWithGoogle } = useAuth();
-  const navigate = useNavigate();
 
   useEffect(() => {
     setActiveTab(location.pathname);
@@ -18,18 +16,6 @@ function Navbar() {
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
-  };
-
-  const handleAdminClick = async () => {
-    if (!user) {
-      try {
-        await signInWithGoogle();
-      } catch (error) {
-        console.error("Lỗi khi đăng nhập bằng Google", error);
-      }
-    } else {
-      navigate("/admin");
-    }
   };
 
   return (
@@ -62,15 +48,7 @@ function Navbar() {
             About
           </p>
         </Link>
-        <Link to="/news">
-          <p
-            className={`${activeTab === "/news" ? "active" : ""}`}
-            onClick={() => setActiveTab("/news")}
-          >
-            News
-          </p>
-        </Link>
-        <Link to="/admin" onClick={handleAdminClick}>
+        <Link to="/admin">
           <p className={`${activeTab === "/admin" ? "active" : ""}`}>Admin</p>
         </Link>
       </div>

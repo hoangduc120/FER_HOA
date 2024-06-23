@@ -27,10 +27,7 @@ function LoginGG() {
         <div className="wrapper">
           <div className="profile-card js-profile-card">
             <div className="profile-card__img">
-              <img
-                src="https://pbs.twimg.com/profile_images/1680659910860869632/0YdmM9FN_400x400.jpg"
-                alt="profile card"
-              />
+              <img src="src/assets/web/HoangDuc.jpg" alt="profile card" />
             </div>
             <div className="profile-card__cnt js-profile-cnt">
               <div className="profile-card__name">{userData.displayName}</div>

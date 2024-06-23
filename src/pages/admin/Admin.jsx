@@ -13,7 +13,9 @@ function Admin() {
   const fetchData = () => {
     axios
       .get("https://664eb874fafad45dfae0e1bc.mockapi.io/orchids")
-      .then((res) => setData(res.data))
+      .then((res) => {
+        setData(res.data);
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -35,7 +37,7 @@ function Admin() {
         .catch((error) => {
           toast.error("Error deleting!");
           console.log(error);
-        })
+        });
     }
   };
 
@@ -43,9 +45,13 @@ function Admin() {
     <>
       <div className="container">
         <ToastContainer />
-        <Link to={"/create"}>
-          <Button className="button-add">Add +</Button>
-        </Link>
+        <div className="button-add">
+          <Link to={"/create"}>
+            <Button variant="contained" color="primary">
+              Add +
+            </Button>
+          </Link>
+        </div>
         <table className="admin-table">
           <thead>
             <tr>
@@ -75,7 +81,7 @@ function Admin() {
                   {" "}
                   <Rating name="read-only" value={item.rating} readOnly />
                 </td>
-                <td>{item.isSpecial}</td>
+                <td>{item.isSpecial ? "True" : "False"}</td>
                 <td>
                   <div className="button-container">
                     <Button

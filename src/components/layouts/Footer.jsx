@@ -1,8 +1,7 @@
 import footerLogo from "../../assets/web/logo02.jpg";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+import { Facebook, Instagram, Twitter, LinkedIn} from '@mui/icons-material';
+import { Box, IconButton } from '@mui/material';
+
 import "./_footer.scss";
 const Footer = () => {
   return (
@@ -19,12 +18,52 @@ const Footer = () => {
               <div className="social-icons">TRANG CHỦ</div>
               <div className="social-icons">VỀ CHÚNG TÔI</div>
               <div className="social-icons">LIÊN HỆ CHÚNG TÔI</div>
-              <div className="icon">
-                <FacebookIcon className="icon-con" />
-                <InstagramIcon className="icon-con" />
-                <YouTubeIcon className="icon-con" />
-                <LocalPhoneIcon className="icon-con" />
-              </div>
+              <Box sx={{ mt: 2 }} className="icon">
+                <IconButton
+                  color="inherit"
+                  href="https://www.facebook.com/shinichikun120"
+                  target="_blank"
+                  sx={{
+                    transition: "transform 0.3s",
+                    "&:hover": { transform: "scale(1.2)" },
+                  }}
+                >
+                  <Facebook />
+                </IconButton>
+                <IconButton
+                  color="inherit"
+                  href="https://instagram.com"
+                  target="_blank"
+                  sx={{
+                    transition: "transform 0.3s",
+                    "&:hover": { transform: "scale(1.2)" },
+                  }}
+                >
+                  <Instagram />
+                </IconButton>
+                <IconButton
+                  color="inherit"
+                  href="https://twitter.com"
+                  target="_blank"
+                  sx={{
+                    transition: "transform 0.3s",
+                    "&:hover": { transform: "scale(1.2)" },
+                  }}
+                >
+                  <Twitter />
+                </IconButton>
+                <IconButton
+                  color="inherit"
+                  href="https://linkedin.com"
+                  target="_blank"
+                  sx={{
+                    transition: "transform 0.3s",
+                    "&:hover": { transform: "scale(1.2)" },
+                  }}
+                >
+                  <LinkedIn />
+                </IconButton>
+              </Box>
             </div>
             <div className="footer-section">
               <h2>THÔNG TIN</h2>

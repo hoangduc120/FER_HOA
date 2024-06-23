@@ -21,7 +21,10 @@ const Orchids = () => {
   useEffect(() => {
     axios
       .get("https://664eb874fafad45dfae0e1bc.mockapi.io/orchids")
-      .then((res) => setData(res.data))
+      .then((res) => {
+        setData(res.data);
+      })
+
       .catch((err) => console.log(err));
   }, []);
 

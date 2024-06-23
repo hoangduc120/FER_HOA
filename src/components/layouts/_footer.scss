@@ -1,5 +1,6 @@
 .footer {
   min-height: 200px;
+  width: 100%;
   &-background {
     background-image: url("../../assets/web/bannerhoa.jpg");
     background-position: bottom;
@@ -67,5 +68,11 @@
   font-size: 30px;
   .icon-con {
     padding: 0px 5px;
+  }
+}
+@media (max-width: 768px) {
+  .icon {
+    justify-content: center;
+    margin-top: 10px;
   }
 }

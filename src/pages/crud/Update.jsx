@@ -21,7 +21,7 @@ function Update() {
     origin: "",
     color: "",
     category: "",
-    rating: "",
+    rating: 0,
     isSpecial: false,
     video: "",
   });
@@ -59,7 +59,6 @@ function Update() {
     origin: Yup.string().required("Origin is required"),
     color: Yup.string().required("Color is required"),
     category: Yup.string().required("Category is required"),
-    isSpecial: Yup.boolean().required("IsSpecial is required"),
     rating: Yup.number()
       .required("Rating is required")
       .min(1, "Min rating is 1")
@@ -70,7 +69,7 @@ function Update() {
   });
 
   return (
-    <div>
+    <div className="container">
       <h1>Update Orchid</h1>
       <Formik
         initialValues={orchid}
@@ -78,7 +77,7 @@ function Update() {
         onSubmit={handleSubmit}
         enableReinitialize={true}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, values, setFieldValue }) => (
           <Form>
             <Field
               as={TextField}
@@ -174,11 +173,13 @@ function Update() {
             <Box mb={3}>
               <FormControlLabel
                 control={
-                  <Field
-                    as={Switch}
-                    type="checkbox"
+                  <Switch
+                    checked={values.isSpecial}
                     name="isSpecial"
                     color="primary"
+                    onChange={(e) =>
+                      setFieldValue("isSpecial", e.target.checked)
+                    }
                   />
                 }
                 label="Is Special"

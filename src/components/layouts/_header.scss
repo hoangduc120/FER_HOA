@@ -1,31 +1,55 @@
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #eeeeee; // Thay đổi màu nền tùy thích
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+  .header_icon_left,
+  .header_icon_right {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background-color: #eeeeee; // Thay đổi màu nền tùy thích
-  
-    .header_icon_left,
-    .header_icon_right {
-      display: flex;
-      align-items: center;
-      padding: 0 50px;
-  
-      .MuiSvgIcon-root {
-        font-size: 2rem; // Tăng kích thước biểu tượng
-        margin: 0 10px; // Điều chỉnh khoảng cách giữa các biểu tượng
-      }
+    padding: 0 50px;
+
+    @media (max-width: 768px) {
+      padding: 0;
+      margin-top: 10px;
     }
-  
-    .header_logo {
-      flex: 1; // Cho phép logo chiếm không gian có sẵn
-      display: flex;
-      justify-content: center;
-  
-      img {
-        max-width: 300px; // Điều chỉnh chiều cao logo
-        width: auto; // Giữ tỉ lệ khung hình
+    .MuiSvgIcon-root {
+      font-size: 2rem; // Tăng kích thước biểu tượng
+      margin: 0 10px; // Điều chỉnh khoảng cách giữa các biểu tượng
+    }
+  }
+
+  .header_logo {
+    flex: 1; // Cho phép logo chiếm không gian có sẵn
+    display: flex;
+    justify-content: center;
+
+    img {
+      max-width: 300px; // Điều chỉnh chiều cao logo
+      width: auto; // Giữ tỉ lệ khung hình
+
+      @media (max-width: 768px) {
+        max-width: 200px; // Giảm kích thước logo trên thiết bị di động
       }
     }
   }
-  
+  .header_icon_right {
+    @media (max-width: 768px) {
+      order: -1; // Đảo thứ tự hiển thị của phần này lên đầu trong bố cục dọc
+      display: flex;
+      justify-content: center;
+      width: 100%;
+
+      .MuiButtonBase-root {
+        padding: 10px;
+      }
+    }
+  }
+}

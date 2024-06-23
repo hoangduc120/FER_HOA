@@ -1,5 +1,5 @@
 // src/News.jsx
-import React from 'react';
+
 import { Typography, Container } from '@mui/material';
 
 const News = () => {
