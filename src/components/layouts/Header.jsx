@@ -1,7 +1,7 @@
 import { useState } from "react";
 import headerLogo from "../../assets/web/logo02.jpg";
 import PersonIcon from "@mui/icons-material/Person";
-import { Button, Menu, MenuItem } from "@mui/material";
+import { Menu, MenuItem } from "@mui/material";
 import { Link } from "react-router-dom";
 import "./_header.scss";
 import { IconButton } from "@mui/material";
@@ -59,7 +59,7 @@ function Header() {
         <img src={headerLogo} alt="logo" />
       </div>
       <div>
-        <Button
+        <div
           id="basic-button"
           aria-controls={open ? "basic-menu" : undefined}
           aria-haspopup="true"
@@ -75,7 +75,7 @@ function Header() {
           >
             <PersonIcon />
           </IconButton>
-        </Button>
+        </div>
         <Menu
           id="basic-menu"
           anchorEl={anchorEl}

@@ -1,6 +1,6 @@
-import footerLogo from "../../assets/web/logo02.jpg";
-import { Facebook, Instagram, Twitter, LinkedIn} from '@mui/icons-material';
-import { Box, IconButton } from '@mui/material';
+import footerLogo from "../../assets/web/logo07.jpg";
+import { Facebook, Instagram, Twitter, LinkedIn } from "@mui/icons-material";
+import { Box, IconButton } from "@mui/material";
 
 import "./_footer.scss";
 const Footer = () => {
@@ -15,9 +15,9 @@ const Footer = () => {
             <div className="footer-section">
               <h2>CÁC TRANG</h2>
               <br />
-              <div className="social-icons">TRANG CHỦ</div>
-              <div className="social-icons">VỀ CHÚNG TÔI</div>
-              <div className="social-icons">LIÊN HỆ CHÚNG TÔI</div>
+              <div className="social">TRANG CHỦ</div>
+              <div className="social">VỀ CHÚNG TÔI</div>
+              <div className="social">LIÊN HỆ CHÚNG TÔI</div>
               <Box sx={{ mt: 2 }} className="icon">
                 <IconButton
                   color="inherit"

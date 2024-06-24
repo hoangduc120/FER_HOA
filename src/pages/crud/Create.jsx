@@ -167,7 +167,7 @@ function Create() {
             helperText={formik.touched.video && formik.errors.video}
           />
         </Box>
-        <Button type="submit" fullWidth disabled={isSubmitting}>
+        <Button type="submit" fullWidth disabled={isSubmitting} >
           {isSubmitting ? "Submitting..." : "Submit"}
         </Button>
         <Button component={Link} to={"/admin"} fullWidth>

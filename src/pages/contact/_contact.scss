@@ -1,21 +1,21 @@
+/* _contact.scss */
 
-.contact {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 16px;
-    text-align: center;
+.contact-section {
+  padding: 7em 0; /* Khoảng cách phần trên và dưới của section */
+}
+.wrapper {
+  width: 100%;
 }
 
-.contact h2 {
-    margin-bottom: 16px;
+
+.info-wrap {
+  background-color: #fff; /* Màu nền của phần thông tin liên hệ */
+  padding: 20px;
+  border-radius: 8px; /* Góc bo tròn */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
 }
-/* src/Contact.css */
-.contact {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .contact p {
-    margin: 10px 0;
-  }
-  
+
+.icon-box {
+  font-size: 18px; /* Kích thước biểu tượng */
+  margin-right: 10px; /* Khoảng cách với chữ */
+}
